@@ -12,7 +12,7 @@ title: contact
                     </div>
                     <p class="mb-4">Pour toutes questions, rendez-vous ou estimations, envoyez-nous un message et nous 
                       vous répondrons dans les plus brefs délais.</p>
-                    <form action="https://api.lesbijoutieres.com/contact" method="post">
+                    <form id="contact" action="https://api.lesbijoutieres.com/contact" method="post">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
@@ -45,6 +45,7 @@ title: contact
                                 </div>
                             </div>
                             <div class="col-12">
+                                <input type="hidden" id="token" name="token" />
                                 <button class="btn btn-primary w-100 py-3" type="submit">Envoyer</button>
                             </div>
                         </div>
@@ -62,3 +63,11 @@ title: contact
         </div>
     </div>
 </div>
+
+<script>
+  grecaptcha.enterprise.ready(async () => {
+    const token = await grecaptcha.enterprise.execute('6LcLdT0rAAAAAEpJxGbTzofHN-fVy_xtaVwCsSSd', { action: 'CONTACT' });
+    const form = document.getElementById('contact');
+    form.token.value = token;
+  });
+</script>
